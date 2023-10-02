@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class GetVacancy(ABC):
     """
-    ААбстрактный класс для работы с API сайтов с вакансиями
+    Абстрактный класс для работы с API сайтов с вакансиями
     """
 
     @abstractmethod
@@ -13,18 +13,44 @@ class GetVacancy(ABC):
         """
         pass
 
-    # @staticmethod
-    # @abstractmethod
-    # def organize_vacancy_info(vacancy_data: list) -> list:
-    #     """Организует данные о вакансиях в определённом виде"""
-    #     pass
- # @property
- #    def currency(self):
- #        return self.__currency
- #
- #    @currency.setter
- #    def currency(self, currency_):
- #        if currency_.lower() == 'rub':
- #            self.__currency = 'RUR'
- #        else:
- #            self.__currency = currency_
+
+class Saver(ABC):
+    """
+    Абстрактный класс, который обязывает реализовать методы для добавления вакансий в файл,
+    получения данных из файла по указанным критериям и удаления информации о вакансиях.
+    """
+
+    @abstractmethod
+    def save_vacancies(self, vacancies):
+        """
+        записывает вакансии в файл
+        :param vacancies: список вакансий
+        :return:
+        """
+        pass
+
+    @abstractmethod
+    def load_vacancies(self, file_name='vacancy'):
+        """
+        читает вакансии из файла
+        :param file_name: имя файла
+        :return: список с вакансиями
+        """
+
+    @abstractmethod
+    def add_vacancy(self, vacancy):
+        """
+        добавляет вакансию в файл
+        :param vacancy: словарь с данными о вакансии
+        :return: новый файл
+        """
+        pass
+
+    @abstractmethod
+    def del_vacancy(self, vacancy):
+        """
+        удаляет вакансию из файла
+        :param vacancy: словарь с данными о вакансии
+        :return: новый файл
+        """
+        pass

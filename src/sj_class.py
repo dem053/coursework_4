@@ -37,17 +37,6 @@ class SuperJobAPI(GetVacancy, ABC):
         vacancies = response.json()['objects']
         result = []
         for v in vacancies:
-            """
-                Класс вакансий
-                : param name -- название вакансии
-                : param source -- источник
-                : param v_url -- ссылка
-                : param employer -- работодатель
-                : param requirement -- описание
-                : param salary_from -- з/п от
-                : param salary_to -- з/п до
-                : param currency -- валюта з/п
-                """
             name = v['profession']
             source = 'SuperJob'
             v_url = v['link']
