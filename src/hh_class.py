@@ -37,23 +37,13 @@ class HeadHunterAPI(GetVacancy, ABC):
         vacancies = response.json()['items']
         result = []
         for v in vacancies:
-            """
-                Класс вакансий
-                : param name -- название вакансии
-                : param source -- источник
-                : param v_url -- ссылка
-                : param employer -- работодатель
-                : param requirement -- описание
-                : param salary_from -- з/п от
-                : param salary_to -- з/п до
-                : param currency -- валюта з/п
-                """
             name = v['name']
             source = 'HeadHunter'
             v_url = v['alternate_url']
             employer = v['employer']['name']
-            requirement = v['snippet']['requirement'].strip().replace('<highlighttext>', '').replace('</highlighttext>',
-                                                                                                     '')
+            requirement = v['snippet']['requirement']
+            if requirement:
+                requirement = v['snippet']['requirement'].replace('<highlighttext>', '').replace('</highlighttext>', '')
             if v['salary'] is not None:
                 salary_from = v['salary']['from']
                 salary_to = v['salary']['to']
