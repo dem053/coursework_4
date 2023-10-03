@@ -30,7 +30,7 @@ class Saver(ABC):
         pass
 
     @abstractmethod
-    def load_vacancies(self, file_name='vacancy'):
+    def load_vacancies(self):
         """
         читает вакансии из файла
         :param file_name: имя файла
