@@ -8,7 +8,7 @@ class Vacancy:
     : param requirement -- описание
     : param salary_from -- з/п от
     : param salary_to -- з/п до
-    : param carrency -- валюта з/п
+    : param car -- валюта з/п
     """
 
     def __init__(self, name: str, source: str, v_url: str, employer: str, requirement: str, salary_from=None,
@@ -29,7 +29,7 @@ class Vacancy:
     @salary_from.setter
     def salary_from(self, value):
         if value:
-            self._salary_from = int(value)
+            self._salary_from = int(float(value))
         else:
             self._salary_from = 0
 
@@ -40,7 +40,7 @@ class Vacancy:
     @salary_to.setter
     def salary_to(self, value):
         if value:
-            self._salary_to = int(value)
+            self._salary_to = int(float(value))
         else:
             self._salary_to = 0
 
@@ -86,3 +86,44 @@ class Vacancy:
         return {'name': self.name, 'source': self.source, 'v_url': self.v_url, 'employer': self.employer,
                 'requirement': self.requirement, 'salary_from': self._salary_from, 'salary_to': self._salary_to,
                 'currency': self.cur}
+
+    def max_salary(self):
+        """
+        метод возвращающий максимальное значение между salary_from и salary_to
+        используется для сравнения вакансий
+        :return: max (salary_from и salary_to)
+        """
+        return max(self.salary_to, self.salary_from)
+
+    def __lt__(self, other):
+        if self.cur != other.cur:
+            raise TypeError ('пока не умею сравнивать разные валюты')
+        else:
+            return self.max_salary() < other.max_salary()
+
+    def __le__(self, other):
+        if self.cur != other.cur:
+            raise TypeError ('пока не умею сравнивать разные валюты')
+        else:
+            return self.max_salary() <= other.max_salary()
+
+    def __gt__(self, other):
+        if self.cur != other.cur:
+            raise TypeError ('пока не умею сравнивать разные валюты')
+        else:
+            return self.max_salary() > other.max_salary()
+
+    def __ge__(self, other):
+        if self.cur != other.cur:
+            raise TypeError ('пока не умею сравнивать разные валюты')
+        else:
+            return self.max_salary() >= other.max_salary()
+
+    @classmethod
+    def get_vac_from_dict(cls, user_dict):
+        """
+        конструктор экземпляра по словарю
+        :param user_dict: словарь
+        :return: экземпляр класса
+        """
+        return cls(user_dict['name'], user_dict['source'], user_dict['v_url'], user_dict['employer'], user_dict['requirement'], user_dict['salary_from'], user_dict['salary_to'], user_dict['currency'])
