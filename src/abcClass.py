@@ -33,12 +33,11 @@ class Saver(ABC):
     def load_vacancies(self):
         """
         читает вакансии из файла
-        :param file_name: имя файла
         :return: список с вакансиями
         """
 
     @abstractmethod
-    def add_vacancy(self, vacancy):
+    def add_vacancy_save(self, vacancy):
         """
         добавляет вакансию в файл
         :param vacancy: словарь с данными о вакансии
@@ -47,7 +46,7 @@ class Saver(ABC):
         pass
 
     @abstractmethod
-    def del_vacancy(self, vacancy):
+    def del_vacancy_save(self, vacancy):
         """
         удаляет вакансию из файла
         :param vacancy: словарь с данными о вакансии
