@@ -9,10 +9,10 @@ class HeadHunterAPI(GetVacancy, ABC):
     hh_url = "https://api.hh.ru/vacancies"
 
     def __init__(self, area=113, page=0, per_page=100):
-        ''' конструктор
+        """ конструктор
         :param area -- область поиска
         :param page -- количество страниц
-        :param per_page -- количество вакансий'''
+        :param per_page -- количество вакансий"""
 
         self.area = area
         self.page = page
